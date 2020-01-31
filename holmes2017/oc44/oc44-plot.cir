@@ -1,0 +1,24 @@
+Holmes OC44 Plots
+
+.lib ../../germaniumbjts.lib holmes2017
+
+Q1 2 1 0 OC44
+
+.param ib=0
+
+Ib 1 0 DC {ib}
+Vce 2 0 DC 0
+
+.control
+
+* Replicate Holmes plot
+foreach ibi 8u 25u 38u 50u
+alterparam ib=$ibi
+reset
+dc Vce -5 5 0.1
+wrdata output-ib_{$ibi} i(Vce)
+end
+
+.endc
+
+.end

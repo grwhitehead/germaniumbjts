@@ -1,0 +1,31 @@
+Holmes Rangemaster Plots
+
+.lib ../../germaniumbjts.lib holmes2017
+
+.include rangemaster.mod
+
+.param vol=0.99
+
+X1 in out rangemaster vol=vol
+
+.param frq=440
+.param amp=1
+
+Vin in 0 sin(0 {amp} {frq} 0 0)
+
+.control
+foreach frqi 200 500 1200
+  foreach ampi 0.1 0.5 1
+
+alterparam frq=$frqi
+alterparam amp=$ampi
+reset
+* 44100Hz sampling frequency, capture 4 cycles of 440Hz input signal
+tran 22.675u 0.109 0.100
+wrdata output-frq_{$frqi}-amp_{$ampi} v(out)
+
+  end
+end
+.endc
+
+.end

@@ -1,0 +1,35 @@
+Holmes Fuzz Face Plots
+
+.lib ../../germaniumbjts.lib holmes2017
+
+.include fuzzface.mod
+
+.param fuz=0.99
+.param vol=0.99
+
+X1 in out fuzzface fuz=fuz vol=vol
+
+.param frq=440
+.param amp=1
+
+Vin in 0 sin(0 {amp} {frq} 0 0)
+
+.control
+foreach fuzi 0.01 0.1 0.5 0.99
+  foreach frqi 200 500 1200
+    foreach ampi 0.001 0.01 0.1
+
+alterparam fuz=$fuzi
+alterparam frq=$frqi
+alterparam amp=$ampi
+reset
+* 44100Hz sampling frequency, capture 4 cycles of 440Hz input signal
+tran 22.675u 0.109 0.100
+wrdata output-fuz_{$fuzi}-frq_{$frqi}-amp_{$ampi} v(out)
+
+    end
+  end
+end
+.endc
+
+.end

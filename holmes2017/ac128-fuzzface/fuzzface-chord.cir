@@ -1,0 +1,25 @@
+Holmes Fuzz Face Chord
+
+.lib ../../germaniumbjts.lib holmes2017
+
+.include fuzzface.mod
+
+.param fuz=0.99
+.param vol=0.99
+
+X1 in out fuzzface fuz=fuz vol=vol
+
+.model filesrc filesource (file="chord" amploffset=[0] amplscale=[1]
++                          timeoffset=0 timescale=1
++                          timerelative=false amplstep=false)
+
+a1 %vd([in 0]) filesrc
+
+.control
+save v(out)
+option reltol=.01
+tran 22.675u 7.07
+wrdata chord-fuzzface v(out)
+.endc
+
+.end
