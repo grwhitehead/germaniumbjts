@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+    <title>germaniumbjts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Custom styles for this site -->
+    <link href="/css/site.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <div class="jumbotron">
+        <h1>Germanium BJT SPICE Models</h1>
+        <p>
+          Germanium BJT SPICE models based on Gummel-Poon parameters extracted from vintage OC44 and AC128 components by Holmes, Holters, and van Walstijn, as presented in <a href="http://benholmes.co.uk/publication/2017-09-05-Comparison%20of%20Germanium%20BJT%20models">"Comparison of Germanium Bipolar Junction Transistor Models for Real-Time Circuit Simulation”, Proceedings of the 20th International Conference on Digital Audio Effects, Edinburgh, Scotland, Sept. 2017</a>.
+        </p>
+        <p>
+          Repository: <a href="https://github.com/grwhitehead/germaniumbjts">https://github.com/grwhitehead/germaniumbjts</a>
+        </p>
+      </div>
+
+      <h2>Models</h2>
+      
+      <pre>
+* B. Holmes, M. Holters, M. van Walstijn. “Comparison of Germanium Bipolar Junction Transistor Models for Real-Time Circuit Simulation”, Proceedings of the 20th International Conference on Digital Audio Effects, Edinburgh, Scotland, Sept. 2017
+
+.MODEL OC44 PNP(IS=1.423u BF=307.0 BR=20.27 NF=1.022 NR=1.025 VT=25.5m VAF=8.167 VAR=14.84 IKF=43.82m IKR=611.7m ISE=30.54n ISC=213.5n NE=1.316 NC=1.258 RB=32.83 RE=968.7m RC=989.9u CEB=410p CCB=10p)
+
+.MODEL AC128 PNP(IS=20.66u BF=229.6 BR=14.66 NF=1.133 NR=1.140 VT=25.5m VAF=19.68 VAR=88.28 IKF=463.0m IKR=241.5m ISE=2.190u ISC=7.546u NE=1.796 NC=1.364 RB=1.885 RE=306.4m RC=1.727u CCB=100p)
+      </pre>
+
+      <p>
+        The models have been tested in ngspice, successfully reproducing results from the paper (see holmes2017 directory in repository).
+      </p>
+
+      <h3>OC44 Test Results</h3>
+    
+      <p>
+        Common-emitter characteristics plot (compare to figure 6 in paper):
+      </p>
+      <img class="img-responsive" src="holmes2017/oc44/output.png">
+
+      <p>
+        Rangemaster circuit simulation response to 500Hz sinusoidal input (compare to figure 10 in paper):
+      </p>
+      <img class="img-responsive" src="holmes2017/oc44-rangemaster/output-frq_500-amps.png">
+
+      <p>
+        Rangemaster circuit simulation audio samples (compare to <a href="https://bholmesqub.github.io/DAFx17/">https://bholmesqub.github.io/DAFx17/</a>):
+      </p>
+      <ul>
+        <li> chord (dry)<br/>
+          <audio controls="">
+            <source src="holmes2017/oc44-rangemaster/chord.wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        <li> chord (rangemaster)<br/>
+          <audio controls="">
+            <source src="holmes2017/oc44-rangemaster/chord-rangemaster.wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+      </ul>
+
+      <h3>AC128 Test Results</h3>
+      
+      <p>
+        Common-emitter characteristics plot (compare to figure 7 in paper):
+      </p>
+      <img class="img-responsive" src="holmes2017/ac128/output.png">
+
+      <p>
+        Fuzz Face circuit simulation response to 500Hz sinusoidal input (compare to figure 11 in paper):
+      </p>
+      <img class="img-responsive" src="holmes2017/ac128-fuzzface/output-fuz_0.99-frq_500-amps.png">
+      
+      <p>
+        Fuzz Face circuit simulation audio samples (compare to <a href="https://bholmesqub.github.io/DAFx17/">https://bholmesqub.github.io/DAFx17/</a>):
+      </p>
+      <ul>
+        <li> chord (dry)<br/>
+          <audio controls="">
+            <source src="holmes2017/ac128-fuzzface/chord.wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+          
+        <li> chord (fuzzface at max fuzz)<br/>
+          <audio controls="">
+            <source src="holmes2017/ac128-fuzzface/chord-fuzzface.wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+      </ul>
+
+      <h3>Running the Tests</h3>
+
+      <p>
+        The tests are written to run on a Mac with
+        <ul>
+          <li> ngspice (v30) <a href="http://ngspice.sourceforge.net">http://ngspice.sourceforge.net</a>
+          <li> python3 <a href="https://www.python.org">https://www.python.org</a>
+          <li> spice-audio-tools (with my fixes) <a href="https://github.com/grwhitehead/spice-audio-tools">https://github.com/grwhitehead/spice-audio-tools</a>
+        </ul>
+      </p>
+
+      <h4>OC44 Characteristics</h4>
+      <pre>
+% cd holmes2017/oc44
+% ./plot.sh oc44
+      </pre>
+      
+      <h4>OC44 Rangemaster Circuit</h4>
+      <pre>
+% cd holmes2017/oc44-rangemaster
+% ./plot.sh rangemaster
+% ./chord.sh rangemaster
+      </pre>
+      
+      <h4>AC128 Characteristics</h4>
+      <pre>
+% cd holmes2017/ac128
+% ./plot.sh ac128
+      </pre>
+
+      <h4>AC128 Fuzz Face Circuit</h4>
+      <pre>
+% cd holmes2017/ac128-fuzzface
+% ./plot.sh fuzzface
+% ./chord.sh fuzzface
+      </pre>
+
+      <div class="jumbotron">
+        <p>
+          Copyright (c) 2020 Greg Whitehead
+          <br/>
+          MIT License
+	</p>
+      </div>
+
+    </div>
+ 
+  </body>
+</html>
