@@ -25,14 +25,19 @@
       <div class="jumbotron">
         <h1>Germanium BJT SPICE Models</h1>
         <p>
-          Germanium BJT SPICE models based on Gummel-Poon parameters extracted from vintage OC44 and AC128 components by Holmes, Holters, and van Walstijn, as presented in <a href="http://benholmes.co.uk/publication/2017-09-05-Comparison%20of%20Germanium%20BJT%20models">"Comparison of Germanium Bipolar Junction Transistor Models for Real-Time Circuit Simulation”, Proceedings of the 20th International Conference on Digital Audio Effects, Edinburgh, Scotland, Sept. 2017</a>.
+          Germanium BJT SPICE models based on parameters extracted from vintage OC44 and AC128 components by Holmes, Holters, and van Walstijn, as presented in <a href="http://benholmes.co.uk/publication/2017-09-05-Comparison%20of%20Germanium%20BJT%20models">"Comparison of Germanium Bipolar Junction Transistor Models for Real-Time Circuit Simulation”, Proceedings of the 20th International Conference on Digital Audio Effects, Edinburgh, Scotland, Sept. 2017</a>.
         </p>
         <p>
           Repository: <a href="https://github.com/grwhitehead/germaniumbjts">https://github.com/grwhitehead/germaniumbjts</a>
         </p>
       </div>
 
-      <h2>Models</h2>
+      <h2>SPICE Models</h2>
+
+      <p>
+        These germanium BJT SPICE models are based on the Gummel-Poon parameters from Table 1 in <a href="http://benholmes.co.uk/publication/2017-09-05-Comparison%20of%20Germanium%20BJT%20models">"Comparison of Germanium Bipolar Junction Transistor Models for Real-Time Circuit Simulation”, Proceedings of the 20th International Conference on Digital Audio Effects, Edinburgh, Scotland, Sept. 2017</a>.
+        The parameters were extracted from vintage OC44 and AC128 components.
+      </p>
       
       <pre>
 * B. Holmes, M. Holters, M. van Walstijn. “Comparison of Germanium Bipolar Junction Transistor Models for Real-Time Circuit Simulation”, Proceedings of the 20th International Conference on Digital Audio Effects, Edinburgh, Scotland, Sept. 2017
@@ -41,7 +46,7 @@
 
 .MODEL AC128 PNP(IS=20.66u BF=229.6 BR=14.66 NF=1.133 NR=1.140 VT=25.5m VAF=19.68 VAR=88.28 IKF=463.0m IKR=241.5m ISE=2.190u ISC=7.546u NE=1.796 NC=1.364 RB=1.885 RE=306.4m RC=1.727u CCB=100p)
       </pre>
-
+      
       <p>
         The models have been tested in ngspice, successfully reproducing results from the paper (see holmes2017 directory in repository).
       </p>
