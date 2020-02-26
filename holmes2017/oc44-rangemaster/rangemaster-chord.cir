@@ -8,7 +8,7 @@ Holmes Rangemaster Chord
 
 X1 in out rangemaster vol=vol
 
-.model filesrc filesource (file="chord" amploffset=[0] amplscale=[1]
+.model filesrc filesource (file="data/chord" amploffset=[0] amplscale=[1]
 +                          timeoffset=0 timescale=1
 +                          timerelative=false amplstep=false)
 
@@ -18,7 +18,7 @@ a1 %vd([in 0]) filesrc
 save v(out)
 option reltol=.01
 tran 22.675u 7.07
-wrdata chord-rangemaster v(out)
+wrdata data/chord-rangemaster v(out)
 .endc
 
 .end

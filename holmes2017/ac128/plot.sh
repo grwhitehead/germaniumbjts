@@ -3,8 +3,10 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
+mkdir -p data
+
 ngspice -b $1-plot.cir
 
-./plotoutput.py output output-ib_75u output-ib_501u output-ib_750u output-ib_1000u
+./plotoutput.py plots/$1-ce.png data/$1-ce-ib_75u data/$1-ce-ib_501u data/$1-ce-ib_750u data/$1-ce-ib_1000u
 
-./plotoutput2.py output2 output2
+./plotoutput2.py plots/$1-ce2.png data/$1-ce2

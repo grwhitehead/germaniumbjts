@@ -10,7 +10,9 @@ if [ "$#" -ne 1 ]; then
   exit 1
 fi
 
-${SPICE_AUDIO_TOOLS}/wavtospice.py --vrange 1.0 chord.wav chord
+mkdir -p data
+
+${SPICE_AUDIO_TOOLS}/wavtospice.py --vrange 1.0 audio/chord.wav data/chord
 ngspice -b $1-chord.cir
-${SPICE_AUDIO_TOOLS}/spicetowav.py chord-$1 chord-$1.wav
-afplay chord-$1.wav
+${SPICE_AUDIO_TOOLS}/spicetowav.py data/chord-$1 audio/chord-$1.wav
+

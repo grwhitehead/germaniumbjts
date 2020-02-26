@@ -16,12 +16,12 @@ foreach ibi 75u 501u 750u 1000u
 alterparam ib=$ibi
 reset
 dc Vce -5 5 0.1
-wrdata output-ib_{$ibi} i(Vce)
+wrdata data/ac128-ce-ib_{$ibi} i(Vce)
 end
 
 * Replicate datasheet plot
 dc Vce -5 5 0.1 Ib 1m 10m 1m
-wrdata output2 i(Vce)
+wrdata data/ac128-ce2 i(Vce)
 
 .endc
 

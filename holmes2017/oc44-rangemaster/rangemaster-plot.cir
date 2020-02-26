@@ -8,21 +8,39 @@ Holmes Rangemaster Plots
 
 X1 in out rangemaster vol=vol
 
-.param frq=440
 .param amp=1
+.param frq=440
 
 Vin in 0 sin(0 {amp} {frq} 0 0)
 
 .control
-foreach frqi 200 500 1200
-  foreach ampi 0.1 0.5 1
+foreach ampi 0.1 0.5 1
+  alterparam amp=$ampi
+  foreach frqi 200
+    alterparam frq=$frqi
 
-alterparam frq=$frqi
-alterparam amp=$ampi
 reset
-* 44100Hz sampling frequency, capture 4 cycles of 440Hz input signal
-tran 22.675u 0.109 0.100
-wrdata output-frq_{$frqi}-amp_{$ampi} v(out)
+* 44100Hz sampling frequency, capture 4 cycles of 200Hz input signal
+tran 22.675u 0.12 0.100
+wrdata data/sin_{$frqi}-amp_{$ampi}-rangemaster v(out)
+
+  end
+  foreach frqi 500
+    alterparam frq=$frqi
+
+reset
+* 44100Hz sampling frequency, capture 4 cycles of 500Hz input signal
+tran 22.675u 0.108 0.100
+wrdata data/sin_{$frqi}-amp_{$ampi}-rangemaster v(out)
+
+  end
+  foreach frqi 1200
+    alterparam frq=$frqi
+
+reset
+* 44100Hz sampling frequency, capture 4 cycles of 1200Hz input signal
+tran 22.675u 0.103 0.100
+wrdata data/sin_{$frqi}-amp_{$ampi}-rangemaster v(out)
 
   end
 end

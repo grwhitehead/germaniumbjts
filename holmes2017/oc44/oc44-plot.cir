@@ -16,7 +16,7 @@ foreach ibi 8u 25u 38u 50u
 alterparam ib=$ibi
 reset
 dc Vce -5 5 0.1
-wrdata output-ib_{$ibi} i(Vce)
+wrdata data/oc44-ce-ib_{$ibi} i(Vce)
 end
 
 .endc
